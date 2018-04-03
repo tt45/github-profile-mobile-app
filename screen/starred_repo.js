@@ -27,8 +27,8 @@ class Starred extends Component {
                             url: 'https://api.github.com/user/starred/'+text,
                             method:'put',
                             auth: {
-                                username: 'tt45',
-                                password: 'thompson123'
+                                username: '',
+                                password: ''
                         }
                     }).then(function(response) {
                             console.log(response, "hasai");
@@ -70,8 +70,8 @@ class Starred extends Component {
                                   url: 'https://api.github.com/user/starred/'+data.full_name,
                                   method:'delete',
                                   auth: {
-                                      username: '', //username
-                                      password: '' //password
+                                      username: 'tt45',
+                                      password: 'thompson123'
                               }
                           }).then(function(response) {
                                   console.log(response, "hasai");
@@ -108,7 +108,7 @@ class Starred extends Component {
                       />
                               {this.state.datas.map((repo) => (
                               <Swipeout right={[{
-                                                    text: 'Delete',
+                                                    text: 'Unstar',
                                                     backgroundColor: 'red',
                                                     onPress: () => { this.deleteRepo(repo) }
                                                   }]}

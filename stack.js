@@ -7,40 +7,33 @@ import Repo from './screen/repo';
 import Following from './screen/following';
 import Follower from './screen/follower';
 import Starred from './screen/starred_repo';
+import Notifications from './screen/notifications'
 
-export const Stack = StackNavigator({
-  Profile: {
-          screen: Profile,
-  },
-  Repo: {
-          screen: Repo,
-          navigationOptions: {
-                  title: 'Repositories',
-          },
-  },
-  Following: {
-          screen: Following,
-          navigationOptions: {
-                  title: 'Following page',
-          },
-  },
-  Follower: {
-          screen: Follower,
-          navigationOptions: {
-                  title: 'Follower page',
-          },
-  }
-  /*Starred: {
-          screen: Starred,
-          navigationOptions: {
-                  title: 'Starred repos',
-          },
-  },*/
+
+export const ProfileStack = StackNavigator({
+
+        Profile: {
+                screen: Profile,
+                navigationOptions: {
+                        title: 'Profile',
+                        tabBarLabel: 'Profile',
+                        tabBarIcon: ({ tintColor }) => <Icon name="account-circle" size={35} color={tintColor} />,
+                },
+        },
+        Notifications: {
+          screen: Notifications,
+          navigationOptions: ({ navigation }) => ({
+                  title: 'Notifications',
+          }),
+        },
+
+
+
 });
 
 export const Tabs = TabNavigator({
   Profile: {
-          screen: Profile,
+          screen: ProfileStack,
           navigationOptions: {
                   tabBarLabel: 'Profile',
                   tabBarIcon: ({ tintColor }) => <Icon name="account-circle" size={35} color={tintColor} />,
@@ -87,8 +80,9 @@ export const Root = StackNavigator({
     screen: Tabs,
   },
   Stack: {
-    screen: Stack,
+    screen: ProfileStack,
   },
+
 }, {
   mode: 'modal',
   headerMode: 'none',

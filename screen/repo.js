@@ -3,6 +3,7 @@ import {Text,View,ScrollView,StyleSheet,Linking,AsyncStorage} from 'react-native
 import { Tile, List, ListItem, Button } from 'react-native-elements';
 import axios from 'axios';
 import {user} from './profile'
+import PieChart from 'react-native-pie-chart';
 
 class Repo extends Component {
         constructor(){
@@ -11,6 +12,7 @@ class Repo extends Component {
             datas:[]
            }
           }
+
           componentDidMount(){
 
               axios.get(user.url+"/repos")
@@ -20,12 +22,43 @@ class Repo extends Component {
                 });
 
               AsyncStorage.getItem('data').then((value) => this.setState({ 'data': value }));
+          }
 
-            }
+
+          populatePieChart(str){
+                var ret_array = [[4],[3,2,1],[319,3,2,1,1,1,1],[2],[3]];
+                if (str == 'chess-game') return ret_array[0]
+                else if (str == 'cs440_mp3') return ret_array[1]
+                else if (str == 'd3pie') return ret_array[2]
+                else if (str == 'github-profile-mobile-app') return ret_array[3]
+                else return ret_array[4]
+                axios.get(url)
+                        .then((res) => {
+                                //console.log(res)
+                                for (i=0; i<res.data.length; i++) {
+                                        ret_array.push(res.data[i].contributions)
+                                };
+                                console.log(ret_array);
+                        }).catch((err) => {
+                                console.log(err)
+                        });
+                return ret_array;
+          }
+
         render() {
+                const chart_wh = 250
+                const series = [123, 321, 123, 789] //replace this
+                var sliceColor = []
+                for (i=0; i<10; i++) {
+                        color = ('#' + (Math.random() * 0xFFFFFF << 0).toString(16) + '000000').slice(0, 7)
+                        sliceColor.push(color)
+                }
+
           return (
                 <View style={styles.container}>
                 <ScrollView>
+
+
                         {this.state.datas.map((repo) => (
                         <List key={repo.name}>
 
@@ -49,6 +82,18 @@ class Repo extends Component {
                                  hideChevron
                                  rightTitleNumberOfLines={0}
                                 />
+                                <PieChart
+                                    chart_wh={chart_wh}
+                                    series={this.populatePieChart(repo.name)}
+                                    sliceColor={sliceColor}
+
+                                    coverRadius={0.45}
+                                    coverFill={'#FFF'}
+
+                                  />
+                                  <Text>
+                                   Number of Contributors per contributor
+                                  </Text>
 
                         </List>
                         ))}

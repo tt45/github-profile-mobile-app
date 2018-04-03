@@ -66,6 +66,14 @@ class Profile extends Component {
                                  hideChevron
                                 />
                                 <ListItem
+                                 title="Notifications"
+                                 onPress={() =>
+                                         navigate('Notifications') //navigate('Follower', { name: 'Jane' })
+                                 }
+
+
+                                />
+                                <ListItem
                                  title="Public Repos Page"
                                  //rightTitle={''+this.state.data['public_repos']}
                                  onPress={() =>
@@ -110,5 +118,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     flexWrap: "wrap",
     flexDirection:'row',
+    
   },
 });

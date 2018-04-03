@@ -31,8 +31,8 @@ class following extends Component {
                             url: 'https://api.github.com/user/following/'+text,
                             method:'put',
                             auth: {
-                                username: '', //user name
-                                password: ''  //password
+                                username: '',
+                                password: ''
                         }
                     }).then(function(response) {
                             console.log(response, "hasai");
@@ -73,8 +73,8 @@ class following extends Component {
                             url: 'https://api.github.com/user/following/'+data.login,
                             method:'delete',
                             auth: {
-                                username: 'tt45',
-                                password: 'thompson123'
+                                username: '',
+                                password: ''
                         }
                     }).then(function(response) {
                             console.log(response, "hasai");
@@ -118,7 +118,7 @@ class following extends Component {
 
                         {this.state.datas.map((following) => (
                                 <Swipeout right={[{
-                                                      text: 'Delete',
+                                                      text: 'Unfollow',
                                                       backgroundColor: 'red',
                                                       onPress: () => { this.deleteUser(following) }
                                                     }]}
@@ -160,6 +160,7 @@ const styles = StyleSheet.create({
     //alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 35,
+
   },
   TextInputStyleClass:{
    textAlign: 'center',
